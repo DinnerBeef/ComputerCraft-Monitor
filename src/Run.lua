@@ -1,7 +1,7 @@
 -- List of all files in the program
 programs = {}
-programs["Main"] = 1
-programs["Players"] = 1
+programs["Main.lua"] = 1
+programs["Players.lua"] = 1
 
 for table, File in pairs(programs) do
     shell.run("delete " .. table)
