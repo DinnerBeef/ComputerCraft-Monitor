@@ -14,6 +14,7 @@ local range = 10
 local baseStartX = 5
 local baseStartY = 5
 local baseAddY = 10
+local sleepTime = 1
 
 local ally = "ally"
 local enemy = "enemy"
@@ -42,10 +43,7 @@ function basicARView()
 end
 
 function drawPlayer(user, x, y)
-    print("RUNNING DRAW PLAYER")
     for table, stat in pairs(stats) do
-        print("TABLE: " .. table)
-        print("USER: " .. user)
         if (table == user) then
             print("STAT: " ..stat)
             if (stat == "ally") then
@@ -65,7 +63,6 @@ function showPlayers()
         if player.isPlayerInRange(range, user) then
             if (near[user] == nil) then
                 startY = startY + addY
-                print("ADDING PLAYER: " .. user)
                 drawPlayer(user,startX,startY)
                 if (welcomeON == true) then
                 end
@@ -95,5 +92,5 @@ basicARView()
 
 while true do
     showPlayers()
-    sleep(5)
+    sleep(sleepTime)
 end
