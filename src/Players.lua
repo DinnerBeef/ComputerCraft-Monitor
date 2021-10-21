@@ -15,10 +15,12 @@ local baseStartX = 5
 local baseStartY = 5
 local baseAddY = 10
 
-local stats = {}
+local ally = "ally"
+local enemy = "enemy"
 
-stats["DinnerBeef"] = "ally"
-stats["DinnerPoke101"] = "enemy"
+local stats = {}
+stats["DinnerBeef"] = ally
+stats["DinnerPoke101"] = enemy
 
 local allyColor = 0x113107
 local neutralColor = 0x0F42EC
