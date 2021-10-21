@@ -23,14 +23,14 @@ local stats = {}
 stats["DinnerBeef"] = ally
 stats["DinnerPoke101"] = enemy
 
-local allyColor = 0x113107
+local allyColor = 0x09F37E
 local neutralColor = 0x0F42EC
 local enemyColor = 0xF30909
 
 local near = {}
 
-function getAllPlayers(range)
-    local players = player.getPlayersInRange(range)
+function getAllPlayers(dist)
+    local players = player.getPlayersInRange(dist)
     return players
 end
 
@@ -45,7 +45,6 @@ end
 function drawPlayer(user, x, y)
     for table, stat in pairs(stats) do
         if (table == user) then
-            print("STAT: " ..stat)
             if (stat == "ally") then
                 ar.drawString(user, x, y, allyColor)
             elseif (stat == "enemy") then
@@ -59,18 +58,19 @@ end
 
 function showPlayers()
     local allPlayers = getAllPlayers(range)
-    for table, user in pairs(allPlayers) do
+    for _, user in pairs(allPlayers) do
         if player.isPlayerInRange(range, user) then
             if (near[user] == nil) then
                 startY = startY + addY
                 drawPlayer(user,startX,startY)
                 if (welcomeON == true) then
+                    chat.sendMessageToPlayer(welcome, user, chatName)
                 end
                 near[user] = user
             end
         end
     end
-    for table, user in pairs(near) do
+    for _, user in pairs(near) do
         if player.isPlayerInRange(range, user) then
         else
             if (near[user] == nil) then
@@ -80,7 +80,7 @@ function showPlayers()
                 end
                 near[user] = nil
                 basicARView()
-                for k, v in pairs(near) do
+                for k, _ in pairs(near) do
                     near[k] = nil
                 end
             end
