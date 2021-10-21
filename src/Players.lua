@@ -58,7 +58,7 @@ end
 
 function showPlayers()
     local allPlayers = getAllPlayers(range)
-    for _, user in pairs(allPlayers) do
+    for table, user in pairs(allPlayers) do
         if player.isPlayerInRange(range, user) then
             if (near[user] == nil) then
                 startY = startY + addY
@@ -69,8 +69,9 @@ function showPlayers()
                 near[user] = user
             end
         end
+        table = table
     end
-    for _, user in pairs(near) do
+    for table, user in pairs(near) do
         if player.isPlayerInRange(range, user) then
         else
             if (near[user] == nil) then
@@ -85,6 +86,7 @@ function showPlayers()
                 end
             end
         end
+        table = table
     end
 end
 
