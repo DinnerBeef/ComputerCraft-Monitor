@@ -41,7 +41,10 @@ end
 
 function drawPlayer(user, x, y)
     for table, stat in pairs(stats) do
+        print("TABLE: " .. table)
+        print("USER: " .. user)
         if (table == user) then
+            print("STAT: " ..stat)
             if (stat == "ally") then
                 ar.drawString(user, x, y, allyColor)
             elseif (stat == "enemy") then
