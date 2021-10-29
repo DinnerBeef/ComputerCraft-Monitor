@@ -20,7 +20,7 @@ local ally = "ally"
 local enemy = "enemy"
 
 local stats = {}
-stats["DinnerBeef"] = ally
+stats["DinnerBeef"] = enemy
 stats["DinnerPoke101"] = enemy
 
 local allyColor = 0x09F37E
@@ -49,6 +49,7 @@ function drawPlayer(user, x, y)
                 ar.drawString(user, x, y, allyColor)
             elseif (stat == "enemy") then
                 ar.drawString(user, x, y, enemyColor)
+                shell.run("Alarm CodeRed")
             else
                 ar.drawString(user, x, y, neutralColor)
             end
