@@ -6,6 +6,7 @@ local speakers = { peripheral.find("speaker") }
 
 function playSound (sound)
     for i, speaker in ipairs(speakers) do
+        print("Playing sound " .. sound .. " on speaker " .. speaker)
         speaker.playSound(sound)
     end
 end
