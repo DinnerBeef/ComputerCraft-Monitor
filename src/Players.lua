@@ -91,7 +91,7 @@ function showPlayers()
     end
     for table, user in pairs(near) do -- runs for all players in the near/"in range" table
         if player.isPlayerInRange(range, user) then -- Test if player is still in range
-            playSoundRepeat("CodeRed") -- Plays the sound repeat un the player leaves the range
+        --    playSoundRepeat("CodeRed") -- Plays the sound repeat un the player leaves the range
         else -- runs when the player is not in range anymore
             if (near[user] == nil) then
             else -- runs when the player is not in range anymore
