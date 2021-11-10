@@ -51,7 +51,7 @@ function drawPlayer(user, x, y)
                 ar.drawString(user, x, y, allyColor)
             elseif (stat == "enemy") then
                 ar.drawString(user, x, y, enemyColor)
-                shell.run("Alarm.lua CodeRed 11")
+                shell.run("Alarm.lua CodeRed 1")
             else
                 ar.drawString(user, x, y, neutralColor)
             end
@@ -78,6 +78,7 @@ function showPlayers()
         if player.isPlayerInRange(range, user) then
         else
             if (near[user] == nil) then
+                shell.run("Alarm.lua CodeRed 1")
             else
                 if (leaveON == true) then
                     chat.sendMessageToPlayer(leave, user, chatName)
