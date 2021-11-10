@@ -84,8 +84,8 @@ function showPlayers()
                 near[user] = nil -- Removes the user from the near table so they are not in range for the code
                 basicARView() -- clears the table to remove the players
                 for k, _ in pairs(near) do
-                    drawPlayer(k,startX,startY) -- Draws the player on the AR View
                     startY = startY + addY -- Adds the space between players
+                    drawPlayer(k,startX,startY) -- Draws the player on the AR View
                 end
             end
         end
