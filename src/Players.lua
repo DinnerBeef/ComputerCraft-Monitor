@@ -4,6 +4,8 @@ local player = peripheral.find("playerDetector")
 local chat = peripheral.find("chatBox")
 -- AR Controller
 local ar = peripheral.find("arController")
+--  Geo Scanner
+local env = peripheral.find("geoScanner")
 
 local chatName = "J.A.R.V.I.S."
 local welcomeON = true
@@ -49,7 +51,7 @@ function drawPlayer(user, x, y)
                 ar.drawString(user, x, y, allyColor)
             elseif (stat == "enemy") then
                 ar.drawString(user, x, y, enemyColor)
-                shell.run("Alarm CodeRed")
+                shell.run("Alarm.lua CodeRed")
             else
                 ar.drawString(user, x, y, neutralColor)
             end
