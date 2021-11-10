@@ -58,6 +58,16 @@ function drawPlayer(user, x, y) -- Draws the player in the AR, Runs every time a
     end
 end
 
+function playSoundRepeat(user)
+    for table, stat in pairs(stats) do
+        if (table == user) then
+            if (stat == "enemy") then
+                shell.run("Alarm.lua CodeRed 1")
+            end
+        end
+    end
+end
+
 function showPlayers()
     local allPlayers = getAllPlayers(range) -- Gets all players in range
     for table, user in pairs(allPlayers) do -- runs for each player in range
@@ -75,6 +85,7 @@ function showPlayers()
     end
     for table, user in pairs(near) do -- runs for all players in the near/"in range" table
         if player.isPlayerInRange(range, user) then -- Test if player is still in range
+            playSoundRepeat(user) -- Plays alarm sound if player is still in range
         else -- runs when the player is not in range anymore
             if (near[user] == nil) then
             else -- runs when the player is not in range anymore
