@@ -51,7 +51,7 @@ function drawPlayer(user, x, y)
                 ar.drawString(user, x, y, allyColor)
             elseif (stat == "enemy") then
                 ar.drawString(user, x, y, enemyColor)
-                shell.run("Alarm.lua CodeRed 10")
+                shell.run("Alarm.lua CodeRed 11")
             else
                 ar.drawString(user, x, y, neutralColor)
             end
