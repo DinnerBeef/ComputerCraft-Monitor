@@ -21,7 +21,7 @@ local enemy = "enemy" -- Sets the name of the enemy string
 
 local stats = {} -- Creates a table for the stats
 -- Table for players
-stats["DinnerBeef"] = enemy
+stats["DinnerBeef"] = ally
 stats["DinnerPoke101"] = enemy
 
 local allyColor = 0x09F37E  -- Sets the color of the ally in the AR
