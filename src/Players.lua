@@ -4,39 +4,38 @@ local player = peripheral.find("playerDetector")
 local chat = peripheral.find("chatBox")
 -- AR Controller
 local ar = peripheral.find("arController")
---  Geo Scanner
-local env = peripheral.find("geoScanner")
 
-local chatName = "J.A.R.V.I.S."
-local welcomeON = true
-local welcome = "Welcome To The Base"
-local leaveON = true
-local leave = "Thanks For Visiting Come Again Soon"
-local range = 10
-local baseStartX = 5
-local baseStartY = 5
-local baseAddY = 10
-local sleepTime = 1
+local chatName = "J.A.R.V.I.S." -- Name of the chat box that prints messages
+local welcomeON = true -- Enable/Disable welcome message
+local welcome = "Welcome To The Base" -- Welcome message
+local leaveON = true -- Enable/Disable leave message
+local leave = "Thanks For Visiting Come Again Soon" -- Leave message
+local range = 10 -- Range of the player detector
+local baseStartX = 5 -- AR start position X
+local baseStartY = 5 -- AR start position Y
+local baseAddY = 10 -- Space between players names
+local sleepTime = 1  -- Sleep time between each player detection
 
-local ally = "ally"
-local enemy = "enemy"
+local ally = "ally"  -- Sets the name of the ally sting
+local enemy = "enemy" -- Sets the name of the enemy string
 
-local stats = {}
+local stats = {} -- Creates a table for the stats
+-- Table for players
 stats["DinnerBeef"] = enemy
 stats["DinnerPoke101"] = enemy
 
-local allyColor = 0x09F37E
-local neutralColor = 0x0F42EC
-local enemyColor = 0xF30909
+local allyColor = 0x09F37E  -- Sets the color of the ally in the AR
+local neutralColor = 0x0F42EC -- Sets the color of the neutral in the AR
+local enemyColor = 0xF30909  -- Sets the color of the enemy in the AR
 
 local near = {}
 
-function getAllPlayers(dist)
+function getAllPlayers(dist) -- Gets all players in range
     local players = player.getPlayersInRange(dist)
     return players
 end
 
-function basicARView()
+function basicARView()  -- Sets the basic AR view
     startX = baseStartX
     startY = baseStartY
     addY = baseAddY
@@ -44,7 +43,7 @@ function basicARView()
     ar.drawString("Players", startX, startY, 0xF36F38)
 end
 
-function drawPlayer(user, x, y)
+function drawPlayer(user, x, y) -- Draws the player in the AR, Runs every time a player enters the range
     for table, stat in pairs(stats) do
         if (table == user) then
             if (stat == "ally") then
@@ -60,33 +59,33 @@ function drawPlayer(user, x, y)
 end
 
 function showPlayers()
-    local allPlayers = getAllPlayers(range)
-    for table, user in pairs(allPlayers) do
+    local allPlayers = getAllPlayers(range) -- Gets all players in range
+    for table, user in pairs(allPlayers) do -- runs for each player in range
         if player.isPlayerInRange(range, user) then
-            if (near[user] == nil) then
-                startY = startY + addY
-                drawPlayer(user,startX,startY)
-                if (welcomeON == true) then
+            if (near[user] == nil) then -- Sees if the user is all ready in range
+                startY = startY + addY -- Adds the space between players
+                drawPlayer(user,startX,startY) -- Draws the player on the AR View
+                if (welcomeON == true) then -- Send a welcome message if enabled
                     chat.sendMessageToPlayer(welcome, user, chatName)
                 end
-                near[user] = user
+                near[user] = user -- Adds the user to the near table. Users need to be added so code knows who is in range
             end
         end
         table = table
     end
-    for table, user in pairs(near) do
-        if player.isPlayerInRange(range, user) then
-        else
+    for table, user in pairs(near) do -- runs for all players in the near/"in range" table
+        if player.isPlayerInRange(range, user) then -- Test if player is still in range
+        else -- runs when the player is not in range anymore
             if (near[user] == nil) then
-                shell.run("Alarm.lua CodeRed 1")
-            else
-                if (leaveON == true) then
+            else -- runs when the player is not in range anymore
+                if (leaveON == true) then -- Send a leave message if enabled
                     chat.sendMessageToPlayer(leave, user, chatName)
                 end
-                near[user] = nil
-                basicARView()
+                near[user] = nil -- Removes the user from the near table so they are not in range for the code
+                basicARView() -- clears the table to remove the players
                 for k, _ in pairs(near) do
-                    near[k] = nil
+                    drawPlayer(k,startX,startY) -- Draws the player on the AR View
+                    startY = startY + addY -- Adds the space between players
                 end
             end
         end
