@@ -30,12 +30,14 @@ local enemyColor = 0xF30909  -- Sets the color of the enemy in the AR
 
 local near = {}
 
-function getAllPlayers(dist) -- Gets all players in range
+function getAllPlayers(dist)
+    -- Gets all players in range
     local players = player.getPlayersInRange(dist)
     return players
 end
 
-function basicARView()  -- Sets the basic AR view
+function basicARView()
+    -- Sets the basic AR view
     startX = baseStartX
     startY = baseStartY
     addY = baseAddY
@@ -43,7 +45,8 @@ function basicARView()  -- Sets the basic AR view
     ar.drawString("Players", startX, startY, 0xF36F38)
 end
 
-function drawPlayer(user, x, y) -- Draws the player in the AR, Runs every time a player enters the range
+function drawPlayer(user, x, y)
+    -- Draws the player in the AR, Runs every time a player enters the range
     for table, stat in pairs(stats) do
         if (table == user) then
             if (stat == "ally") then
@@ -58,24 +61,29 @@ function drawPlayer(user, x, y) -- Draws the player in the AR, Runs every time a
     end
 end
 
-function playSoundRepeat(user)
-    for table, stat in pairs(stats) do
-        if (table == user) then
-            if (stat == "enemy") then
-                shell.run("Alarm.lua CodeRed 1")
-            end
+local stateRed = false
+
+function playSoundRepeat(type)
+    -- Plays a sound repeat
+    if (type == "CodeRed") then
+        stateRed = true
+        while (stateRed == true) do
+            shell.run("Alarm.lua CodeRed 1")
         end
     end
 end
 
 function showPlayers()
     local allPlayers = getAllPlayers(range) -- Gets all players in range
-    for table, user in pairs(allPlayers) do -- runs for each player in range
+    for table, user in pairs(allPlayers) do
+        -- runs for each player in range
         if player.isPlayerInRange(range, user) then
-            if (near[user] == nil) then -- Sees if the user is all ready in range
+            if (near[user] == nil) then
+                -- Sees if the user is all ready in range
                 startY = startY + addY -- Adds the space between players
-                drawPlayer(user,startX,startY) -- Draws the player on the AR View
-                if (welcomeON == true) then -- Send a welcome message if enabled
+                drawPlayer(user, startX, startY) -- Draws the player on the AR View
+                if (welcomeON == true) then
+                    -- Send a welcome message if enabled
                     chat.sendMessageToPlayer(welcome, user, chatName)
                 end
                 near[user] = user -- Adds the user to the near table. Users need to be added so code knows who is in range
@@ -83,25 +91,37 @@ function showPlayers()
         end
         table = table
     end
-    for table, user in pairs(near) do -- runs for all players in the near/"in range" table
-        if player.isPlayerInRange(range, user) then -- Test if player is still in range
-            playSoundRepeat(user) -- Plays alarm sound if player is still in range
-        else -- runs when the player is not in range anymore
+    for table, user in pairs(near) do
+        -- runs for all players in the near/"in range" table
+        if player.isPlayerInRange(range, user) then
+            -- Test if player is still in range
+        else
+            -- runs when the player is not in range anymore
             if (near[user] == nil) then
-            else -- runs when the player is not in range anymore
-                if (leaveON == true) then -- Send a leave message if enabled
+            else
+                -- runs when the player is not in range anymore
+                if (leaveON == true) then
+                    -- Send a leave message if enabled
                     chat.sendMessageToPlayer(leave, user, chatName)
                 end
-                near[user] = nil -- Removes the user from the near table so they are not in range for the code
-                basicARView() -- clears the table to remove the players
-                for k, _ in pairs(near) do
-                    startY = startY + addY -- Adds the space between players
-                    drawPlayer(k,startX,startY) -- Draws the player on the AR View
+                for table, stat in pairs(stats) do
+                    -- Test for anyother enemy in range to see if alarm needs to stay on
+                    if (stat == "enemy") then
+                        break
+                    else
+                        stateRed = false
+                    end
                 end
             end
+            near[user] = nil -- Removes the user from the near table so they are not in range for the code
+            basicARView() -- clears the table to remove the players
+            for k, _ in pairs(near) do
+                startY = startY + addY -- Adds the space between players
+                drawPlayer(k, startX, startY) -- Draws the player on the AR View
+            end
         end
-        table = table
     end
+    table = table
 end
 
 basicARView()
