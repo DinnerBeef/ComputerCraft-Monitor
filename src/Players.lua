@@ -55,9 +55,9 @@ function drawPlayer(user, x, y)
                 ar.drawString(user, x, y, enemyColor)
                 shell.run("Redstone.lua White true")
                 shell.run("Alarm.lua CodeRed 1")
-            else
-                ar.drawString(user, x, y, neutralColor)
             end
+        else
+            ar.drawString(user, x, y, neutralColor)
         end
     end
 end
@@ -76,9 +76,11 @@ end
 
 function showPlayers()
     local allPlayers = getAllPlayers(range) -- Gets all players in range
-    for table, user in pairs(allPlayers) do -- runs for each player in range
+    for table, user in pairs(allPlayers) do
+        -- runs for each player in range
         if player.isPlayerInRange(range, user) then
-            if (near[user] == nil) then -- Sees if the user is all ready in range
+            if (near[user] == nil) then
+                -- Sees if the user is all ready in range
                 startY = startY + addY -- Adds the space between players
                 drawPlayer(user, startX, startY) -- Draws the player on the AR View
                 if (welcomeON == true) then
@@ -90,16 +92,22 @@ function showPlayers()
         end
         table = table
     end
-    for table, user in pairs(near) do -- runs for all players in the near/"in range" table
-        if player.isPlayerInRange(range, user) then -- Test if player is still in range
-        --    playSoundRepeat("CodeRed") -- Plays the sound repeat un the player leaves the range
-        else -- runs when the player is not in range anymore
+    for table, user in pairs(near) do
+        -- runs for all players in the near/"in range" table
+        if player.isPlayerInRange(range, user) then
+            -- Test if player is still in range
+            --    playSoundRepeat("CodeRed") -- Plays the sound repeat un the player leaves the range
+        else
+            -- runs when the player is not in range anymore
             if (near[user] == nil) then
-            else -- runs when the player is not in range anymore
-                if (leaveON == true) then -- Send a leave message if enabled
+            else
+                -- runs when the player is not in range anymore
+                if (leaveON == true) then
+                    -- Send a leave message if enabled
                     chat.sendMessageToPlayer(leave, user, chatName)
                 end
-                for table, stat in pairs(stats) do -- Test for anyother enemy in range to see if alarm needs to stay on
+                for table, stat in pairs(stats) do
+                    -- Test for anyother enemy in range to see if alarm needs to stay on
                     if (stat == "enemy") then
                         break
                     else

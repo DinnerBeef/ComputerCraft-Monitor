@@ -1,1 +1,1 @@
-shell.run("Ores")
+shell.run("Players")
