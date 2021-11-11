@@ -15,3 +15,12 @@ function getOre(ore)
     end
     return 0
 end
+
+function printOres()
+    local ores = getOres()
+    for i = 1, #ores do
+        print(ores[i].name .. ": " .. ores[i].amount)
+    end
+end
+
+printOres()
