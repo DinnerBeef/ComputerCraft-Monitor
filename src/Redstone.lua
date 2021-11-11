@@ -30,7 +30,7 @@ redstone["Green"] = 13, WEST
 redstone["Red"] = 14, WEST
 redstone["Black"] = 15, WEST
 
-function redstone(input, state)
+function redstoner(input, state)
     for color1, side, peripheralN in ipairs(redstone) do
         if (color1 == input) then
             redstoneblock = peripheral.warp(redstoneIntegrator_ .. peripheralN)
@@ -41,4 +41,4 @@ function redstone(input, state)
     end
 end
 
-redstone(inputColor, inputState)
+redstoner(inputColor, inputState)
