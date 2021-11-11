@@ -13,14 +13,14 @@ local UP = "up"
 local DOWN = "down"
 
 -- Set the number to the network number
-redstone["While"] = 9, EAST
-redstone["Orange"] = 10, EAST
-redstone["Magenta"] = 11, EAST
-redstone["LightBlue"] = 12, EAST
-redstone["Yellow"] = 13, EAST
-redstone["Lime"] = 14, EAST
-redstone["Pink"] = 15, EAST
-redstone["Gray"] = 16, EAST
+redstone["While"] = 9, SOUTH
+redstone["Orange"] = 10, SOUTH
+redstone["Magenta"] = 11, SOUTH
+redstone["LightBlue"] = 12, SOUTH
+redstone["Yellow"] = 13, SOUTH
+redstone["Lime"] = 14, SOUTH
+redstone["Pink"] = 15, SOUTH
+redstone["Gray"] = 16, SOUTH
 redstone["LightGray"] = 8, WEST
 redstone["Cyan"] = 9, WEST
 redstone["Purple"] = 10, WEST
