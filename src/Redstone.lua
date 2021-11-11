@@ -33,9 +33,13 @@ redstone["Black"] = 15, WEST
 function redstoner(input, state)
     for color1, side, peripheralN in ipairs(redstone) do
         if (color1 == input) then
+            print("Found color: " .. color1)
             redstoneblock = peripheral.warp(redstoneIntegrator_ .. peripheralN)
+            if (redstoneblock == nil) then
+                print("Redstone block not found")
+            end
             if (state == "on") then
-                redstoneblock.setOutput(side, state)
+                redstoneblock.setOutput(side, true)
             end
         end
     end
