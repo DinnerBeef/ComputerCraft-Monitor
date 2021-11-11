@@ -17,9 +17,9 @@ function getOre(ore)
 end
 
 function printOres()
-    local ores = getOres()
-    for i = 1, #ores do
-        print(ores[i].name .. ": " .. ores[i].amount)
+    local ores = scanner.chunkAnalyze()
+    for ore, amount in pairs(ores) do
+        print(ores .. ": " .. amount)
     end
 end
 
