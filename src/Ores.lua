@@ -8,19 +8,22 @@ end
 
 function getOre(ore)
     local ores = getOres()
-    for i = 1, #ores do
-        if ores[i].name == ore then
-            return ores[i].amount
+    for oreName, amount in pairs(ores) do
+        if oreName == ore then
+            return amount
         end
     end
     return 0
 end
 
 function printOres()
+    local file = fs.open("rom/files/ores", "w")
     local ores = scanner.chunkAnalyze()
     for ore, amount in pairs(ores) do
-        print(ores .. ": " .. amount)
+        file.writeLine(ore .. ": " .. amount)
+        print(ore .. ": " .. amount)
     end
+    file.close()
 end
 
 printOres()
