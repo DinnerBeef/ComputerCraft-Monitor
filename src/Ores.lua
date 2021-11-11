@@ -17,10 +17,10 @@ function getOre(ore)
 end
 
 function printOres()
-    local file = fs.open("rom/files/ores", "w")
+    local file = fs.open("ores.txt", "w")
     local ores = scanner.chunkAnalyze()
     for ore, amount in pairs(ores) do
-        file.writeLine(ore .. ": " .. amount)
+        file.write(ore .. ": " .. amount .. "\n")
         print(ore .. ": " .. amount)
     end
     file.close()
