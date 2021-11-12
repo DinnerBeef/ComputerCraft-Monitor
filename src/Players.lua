@@ -92,40 +92,39 @@ function drawPlayer(user, x, y)
             end
             table = table
         end
-    end
-
-    for table, user in pairs(near) do
-        -- runs for all players in the near/"in range" table
-        if player.isPlayerInRange(range, user) then
-            -- Test if player is still in range
-            --    playSoundRepeat("CodeRed") -- Plays the sound repeat un the player leaves the range
-        else
-            -- runs when the player is not in range anymore
-            if (near[user] == nil) then
+        for table, user in pairs(near) do
+            -- runs for all players in the near/"in range" table
+            if player.isPlayerInRange(range, user) then
+                -- Test if player is still in range
+                --    playSoundRepeat("CodeRed") -- Plays the sound repeat un the player leaves the range
             else
                 -- runs when the player is not in range anymore
-                if (leaveON == true) then
-                    -- Send a leave message if enabled
-                    chat.sendMessageToPlayer(leave, user, chatName)
-                end
-                for table, stat in pairs(stats) do
-                    -- Test for anyother enemy in range to see if alarm needs to stay on
-                    if (stat == "enemy") then
-                        break
-                    else
-                        stateRed = false
+                if (near[user] == nil) then
+                else
+                    -- runs when the player is not in range anymore
+                    if (leaveON == true) then
+                        -- Send a leave message if enabled
+                        chat.sendMessageToPlayer(leave, user, chatName)
+                    end
+                    for table, stat in pairs(stats) do
+                        -- Test for anyother enemy in range to see if alarm needs to stay on
+                        if (stat == "enemy") then
+                            break
+                        else
+                            stateRed = false
+                        end
                     end
                 end
-            end
-            near[user] = nil -- Removes the user from the near table so they are not in range for the code
-            basicARView() -- clears the table to remove the players
-            for k, _ in pairs(near) do
-                startY = startY + addY -- Adds the space between players
-                drawPlayer(k, startX, startY) -- Draws the player on the AR View
+                near[user] = nil -- Removes the user from the near table so they are not in range for the code
+                basicARView() -- clears the table to remove the players
+                for k, _ in pairs(near) do
+                    startY = startY + addY -- Adds the space between players
+                    drawPlayer(k, startX, startY) -- Draws the player on the AR View
+                end
             end
         end
+        table = table
     end
-    table = table
 end
 
 basicARView()
