@@ -6,9 +6,9 @@ local chat = peripheral.find("chatBox")
 local ar = peripheral.find("arController")
 
 local chatName = "J.A.R.V.I.S." -- Name of the chat box that prints messages
-local welcomeON = true -- Enable/Disable welcome message
+local welcomeON = false  -- Enable/Disable welcome message
 local welcome = "Welcome To The Base" -- Welcome message
-local leaveON = true -- Enable/Disable leave message
+local leaveON = false -- Enable/Disable leave message
 local leave = "Thanks For Visiting Come Again Soon" -- Leave message
 local range = 10 -- Range of the player detector
 local baseStartX = 5 -- AR start position X
@@ -56,42 +56,44 @@ function drawPlayer(user, x, y)
                 shell.run("Redstone.lua White true")
                 shell.run("Alarm.lua CodeRed 1")
             end
-        else
-            ar.drawString(user, x, y, neutralColor)
-        end
-    end
-end
-
-local stateRed = false
-
-function playSoundRepeat(type)
-    -- Plays a sound repeat
-    if (type == "CodeRed") then
-        stateRed = true
-        while (stateRed == true) do
-            shell.run("Alarm.lua CodeRed 1")
-        end
-    end
-end
-
-function showPlayers()
-    local allPlayers = getAllPlayers(range) -- Gets all players in range
-    for table, user in pairs(allPlayers) do
-        -- runs for each player in range
-        if player.isPlayerInRange(range, user) then
-            if (near[user] == nil) then
-                -- Sees if the user is all ready in range
-                startY = startY + addY -- Adds the space between players
-                drawPlayer(user, startX, startY) -- Draws the player on the AR View
-                if (welcomeON == true) then
-                    -- Send a welcome message if enabled
-                    chat.sendMessageToPlayer(welcome, user, chatName)
-                end
-                near[user] = user -- Adds the user to the near table. Users need to be added so code knows who is in range
+            if (table == nil) then
+                ar.drawString(user, x, y, neutralColor)
             end
         end
-        table = table
     end
+
+    local stateRed = false
+
+    function playSoundRepeat(type)
+        -- Plays a sound repeat
+        if (type == "CodeRed") then
+            stateRed = true
+            while (stateRed == true) do
+                shell.run("Alarm.lua CodeRed 1")
+            end
+        end
+    end
+
+    function showPlayers()
+        local allPlayers = getAllPlayers(range) -- Gets all players in range
+        for table, user in pairs(allPlayers) do
+            -- runs for each player in range
+            if player.isPlayerInRange(range, user) then
+                if (near[user] == nil) then
+                    -- Sees if the user is all ready in range
+                    startY = startY + addY -- Adds the space between players
+                    drawPlayer(user, startX, startY) -- Draws the player on the AR View
+                    if (welcomeON == true) then
+                        -- Send a welcome message if enabled
+                        chat.sendMessageToPlayer(welcome, user, chatName)
+                    end
+                    near[user] = user -- Adds the user to the near table. Users need to be added so code knows who is in range
+                end
+            end
+            table = table
+        end
+    end
+
     for table, user in pairs(near) do
         -- runs for all players in the near/"in range" table
         if player.isPlayerInRange(range, user) then
