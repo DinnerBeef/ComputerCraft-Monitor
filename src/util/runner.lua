@@ -1,16 +1,21 @@
 -- List of all files in the program
+os.loadAPI("api/github")
+
 programs = {}
-programs["Main.lua"] = 1
-programs["Players.lua"] = 1
-programs["Alarm.lua"] = 1
-programs["Ores.lua"] = 1
-programs["Screens.lua"] = 1
-programs["Redstone.lua"] = 1
-programs["Mining.lua"] = 1
+programs["util/main.lua"] = 0 -- Util
+
+programs["main/mining"] = 1 -- Main
+programs["main/ores"] = 1
+programs["main/players"] = 1
+programs["main/screens"] = 1
+
+programs["api/alarm"] = 2 -- API
+programs["api/chat"] = 2
+programs["api/redstone"] = 2
 
 for table, File in pairs(programs) do -- Updates all the programs
-    shell.run("delete " .. table)
-    shell.run('github get ' .. table .. " " .. table)
+    fs.delete(table)
+    github.getGit(table)
 end
 
-shell.run("Main")
+shell.run("main")

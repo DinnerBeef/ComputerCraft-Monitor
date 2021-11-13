@@ -54,8 +54,6 @@ function drawPlayer(user, x, y)
                 ar.drawString(user, x, y, allyColor)
             elseif (stat == "enemy") then
                 ar.drawString(user, x, y, enemyColor)
-                shell.run("Redstone.lua White true")
-                shell.run("Alarm.lua CodeRed 1")
             end
             if (table == nil) then
                 ar.drawString(user, x, y, neutralColor)
@@ -69,7 +67,6 @@ function playSoundRepeat(type)
     if (type == "CodeRed") then
         stateRed = true
         while (stateRed == true) do
-            shell.run("Alarm.lua CodeRed 1")
         end
     end
 end
