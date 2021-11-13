@@ -21,8 +21,6 @@ end
 
 local github_url = "https://raw.githubusercontent.com/DinnerBeef/ComputerCraft-Monitor/main/src/"..github_path
 
-print(github_url)
-
 local request = http.get( github_url )
 local response = request.readAll()
 request.close()
