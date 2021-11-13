@@ -16,6 +16,6 @@ end
 
 getGit("startup.lua", "startup.lua")
 if not fs.exists("api/github") then
-    getGit("api/github", "api/github")
+    getGit("api/github.lua", "api/github")
 end
 shell.run("startup.lua")

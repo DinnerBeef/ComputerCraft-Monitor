@@ -1,8 +1,8 @@
 os.loadAPI("api/github")
 print("Starting Up")
 
-if fs.exists("downloader.lua") then
-    fs.delete("downloader.lua")
+if fs.exists("downloader") then
+    fs.delete("downloader")
     Print("Downloader deleted")
 end
 
@@ -12,6 +12,4 @@ end
 
 github.getGit("util/run.lua", "util/run")
 
---shell.run("delete Run")
---shell.run("github get Run.lua Run")
---shell.run("Run")
+shell.run("util/run")
