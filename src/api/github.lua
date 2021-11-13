@@ -1,6 +1,3 @@
--- Program To Download Files for the First Time
--- Auto Updated On Computer Reload
-
 function getGit(github_path, program) -- function to get git
 
     local github_url = "https://raw.githubusercontent.com/DinnerBeef/ComputerCraft-Monitor/main/src/"..github_path
@@ -12,10 +9,5 @@ function getGit(github_path, program) -- function to get git
     local file = fs.open( program, "w" )
     file.write( response )
     file.close()
-end
 
-getGit("startup.lua", "startup.lua")
-if not fs.exists("api/github") then
-    getGit("api/github", "api/github")
 end
-shell.run("startup.lua")
