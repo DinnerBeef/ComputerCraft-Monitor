@@ -3,7 +3,7 @@ print("Starting Up")
 
 if fs.exists("downloader") then
     fs.delete("downloader")
-    Print("Downloader deleted")
+    print("Downloader deleted")
 end
 
 if fs.exists("util/runner.lua") then
