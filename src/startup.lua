@@ -6,10 +6,10 @@ if fs.exists("downloader") then
     Print("Downloader deleted")
 end
 
-if fs.exists("util/run.lua") then
-    fs.delete("util/run.lua")
+if fs.exists("util/runner.lua") then
+    fs.delete("util/runner.lua")
 end
 
-github.getGit("util/run.lua", "util/run")
+github.getGit("util/runner.lua", "util/runner")
 
-shell.run("util/run")
+shell.run("util/runner")
