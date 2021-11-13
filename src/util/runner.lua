@@ -2,20 +2,20 @@
 os.loadAPI("api/github")
 
 programs = {}
-programs["util/main.lua"] = 0 -- Util
+programs["util/main"] = 1 -- Util
 
-programs["main/mining"] = 1 -- Main
-programs["main/ores"] = 1
-programs["main/players"] = 1
-programs["main/screens"] = 1
+programs["main/mining"] = 2 -- Main
+programs["main/ores"] = 2
+programs["main/players"] = 2
+programs["main/screens"] = 2
 
-programs["api/alarm"] = 2 -- API
-programs["api/chat"] = 2
-programs["api/redstone"] = 2
+programs["api/alarm"] = 3 -- API
+programs["api/chat"] = 3
+programs["api/redstone"] = 3
 
 for table, File in pairs(programs) do -- Updates all the programs
     fs.delete(table)
-    github.getGit(table)
+    github.getGit(table .. ".lua", table)
 end
 
-shell.run("main")
+shell.run("util/main")
