@@ -3,6 +3,7 @@ os.loadAPI("api/github")
 
 programs = {}
 programs["util/main"] = 1 -- Util
+programs["util/config"] = 1
 
 programs["main/mining"] = 2 -- Main
 programs["main/ores"] = 2

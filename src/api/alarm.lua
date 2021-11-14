@@ -1,6 +1,6 @@
 local speakers = { peripheral.find("speaker") }
 
-function playSoundTime (sound, volume, pitch, duration)
+function playSoundForTime (sound, volume, pitch, duration)
     for i = 1, duration do
         for _, speaker in ipairs(speakers) do
             speaker.playSound(sound, volume, pitch)
@@ -10,7 +10,7 @@ function playSoundTime (sound, volume, pitch, duration)
     end
 end
 
-function playSoundRepeat (sound, volume, pitch)
+function playSoundOnRepeat (sound, volume, pitch)
     while true do
         for _, speaker in ipairs(speakers) do
             speaker.playSound(sound, volume, pitch)
