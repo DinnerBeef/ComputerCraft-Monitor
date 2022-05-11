@@ -20,7 +20,7 @@ local stats = config.players
 local inRange = {}
 
 function showPlayers()
-    local allPlayers = detector.getAllPlayers(range)
+    local allPlayers = api/detector.getAllPlayers(range)
     for table, user in pairs(allPlayers) do
         if (inRange[user] == nil) then
             -- Sees if the user is all ready in range
