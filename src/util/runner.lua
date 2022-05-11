@@ -13,6 +13,10 @@ programs["main/screens"] = 2
 programs["api/alarm"] = 3 -- API
 programs["api/chat"] = 3
 programs["api/redstone"] = 3
+programs["api/ar"] = 3
+programs["api/detector"] = 3
+programs["api/speaker"] = 3
+programs["api/github"] = 3
 
 for table, File in pairs(programs) do -- Updates all the programs
     fs.delete(table)

@@ -18,4 +18,3 @@ function playSoundOnRepeat (sound, volume, pitch)
         sleep(1)
     end
 end
-
