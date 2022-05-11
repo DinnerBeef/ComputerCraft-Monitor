@@ -1,5 +1,5 @@
 local controller = peripheral.find("arController")
-os.loadAPI("api/config")
+os.loadAPI("util/config")
 
 local allyColor = config.allyColor
 local neutralColor = config.neutralColor
