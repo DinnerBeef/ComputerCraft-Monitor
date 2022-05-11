@@ -5,13 +5,6 @@ os.loadAPI("api/detector")
 os.loadAPI("api/redstone")
 os.loadAPI("util/config")
 
-alarm = api/alarm
-ar = api/ar
-chat = api/chat
-detector = api/detector
-redstone = api/redstone
-config = util/config
-
 local chatName = config.chatName
 local welcomeON = config.welcomeON
 local welcome = config.welcome
