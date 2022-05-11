@@ -1,8 +1,9 @@
 local controller = peripheral.find("arController")
+os.loadAPI("api/config")
 
-local allyColor = util/config.allyColor
-local neutralColor = util/config.neutralColor
-local enemyColor = util/config.enemyColor
+local allyColor = config.allyColor
+local neutralColor = config.neutralColor
+local enemyColor = config.enemyColor
 
 function basicARView(startX, startY)
     -- Sets the basic AR view
